@@ -12,17 +12,17 @@ import java.text.ParseException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/1.0/facilities")
-public class FacilityController extends BaseController {
+@RequestMapping("/api/1.0/providers")
+public class ProviderController extends BaseController {
 
     @Autowired
-    private ResourceRepository facilities;
+    private ResourceRepository providers;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     Resource getFacility(@PathVariable String id, HttpServletRequest request) {
         checkForValidUserRequest(request);
-        Resource facility = facilities.findResource("facility", id);
+        Resource facility = providers.findResource("facility", id);
         if (facility == null) {
             throw new ResourceNotFoundException();
         }
@@ -31,7 +31,7 @@ public class FacilityController extends BaseController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    List<Resource> listFacilities(@RequestParam(value = "updatedSince", required = false) String updatedSince,
+    List<Resource> listproviders(@RequestParam(value = "updatedSince", required = false) String updatedSince,
                                   @RequestParam(value = "offset", required = false, defaultValue = "0") int offset,
                                   @RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
                                   HttpServletRequest request) {
@@ -39,7 +39,7 @@ public class FacilityController extends BaseController {
         checkForValidUserRequest(request);
 
         try {
-             return facilities.findResources("facility", updatedSince, offset, limit);
+             return providers.findResources("facility", updatedSince, offset, limit);
         } catch (ParseException e) {
             throw new BadRequest(e.getMessage());
         }

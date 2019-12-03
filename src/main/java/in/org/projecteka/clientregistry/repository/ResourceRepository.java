@@ -21,20 +21,20 @@ public class ResourceRepository {
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    private HashMap<String, String> facilitiesMap = new HashMap<>();
+    private HashMap<String, String> providersMap = new HashMap<>();
 
     private Map<String, ArrayList<ResourceUpdate>> resourceFeeds = new HashMap<>();
         private Map<String, HashMap<String, String>> resourceMaps = new HashMap<String, HashMap<String, String>>() {{
-        put("facility",  facilitiesMap);
+        put("facility",  providersMap);
     }};
 
 
     private Map<String, String> resourceUpdateLookup = new HashMap<String, String>() {{
-        put("facility",  "classpath:facilities_list.txt");
+        put("facility",  "classpath:providers_list.txt");
     }};
 
     private Map<String, String> resourceLocations = new HashMap<String, String>() {{
-        put("facility",  "classpath:facilities/");
+        put("facility",  "classpath:providers/");
     }};
 
     private String locateResourceInPath(String id, String path) {
