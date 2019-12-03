@@ -1,0 +1,30 @@
+.gradle
+build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+#Gradle dirs
+.gradle/
+
+#Idea dirs
+.idea/
+*.iml
+*.ipr
+*.iws
+
+#Build dirs
+build/
+out/
+classes
+target
+node_modules
+
+#Target dirs
+target/
+
+#Logs
+nohup.out
+
+#OSX specific files
+.DS_Store
