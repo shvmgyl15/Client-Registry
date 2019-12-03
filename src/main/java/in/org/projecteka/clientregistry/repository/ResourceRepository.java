@@ -55,7 +55,7 @@ public class ResourceRepository {
         return value;
     }
 
-    public List<Resource> findResources(String type, String updatedSince, int offset, int limit) throws ParseException {
+    public List<Resource> findResources(String type, String updatedSince, int offset, int limit, String searchTerm) throws ParseException {
         String location = resourceUpdateLookup.get(type);
         if (StringUtils.isBlank(location)) return new ArrayList<>();
 
@@ -91,7 +91,11 @@ public class ResourceRepository {
         for (ResourceUpdate resourceUpdate : resourceUpdates) {
             Resource resource = findResource(type, resourceUpdate.identifier + ".json");
             if (resource != null) {
-                results.add(resource);
+                if (searchTerm == null) {
+                    results.add(resource);
+                } else if (resource.getValue().contains(searchTerm)){
+                    results.add(resource);
+                }
             }
         }
         return results;

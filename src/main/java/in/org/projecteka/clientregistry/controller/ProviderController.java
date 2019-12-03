@@ -34,12 +34,13 @@ public class ProviderController extends BaseController {
     List<Resource> listproviders(@RequestParam(value = "updatedSince", required = false) String updatedSince,
                                   @RequestParam(value = "offset", required = false, defaultValue = "0") int offset,
                                   @RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
+                                  @RequestParam(value = "searchTerm", required = false) String searchTerm,
                                   HttpServletRequest request) {
 
         checkForValidUserRequest(request);
 
         try {
-             return providers.findResources("facility", updatedSince, offset, limit);
+             return providers.findResources("facility", updatedSince, offset, limit, searchTerm);
         } catch (ParseException e) {
             throw new BadRequest(e.getMessage());
         }

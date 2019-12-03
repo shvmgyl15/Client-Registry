@@ -8,8 +8,8 @@
     "type" : [{
         "code": "prov"
     }],
-    "name" : "TMH",
-    "alias" : ["TMH"],
+    "name" : "AIIMS",
+    "alias" : ["AIIMS"],
     "telecom" : [{ "use": "work", "value": "08080887879", "system": "phone" }],
     "address" : [{ "use": "work", "type": "both", "city": "Bangalore", "state": "Karnataka" }]
 }
