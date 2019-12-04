@@ -1,15 +1,37 @@
 {
-    "resourceType" : "Organization",
-    "identifier" : [{
-        "use": "usual",
-        "type": "12345"
-    }],
-    "active" : true,
-    "type" : [{
-        "code": "prov"
-    }],
-    "name" : "TMH",
-    "alias" : ["TMH"],
-    "telecom" : [{ "use": "work", "value": "08080887879", "system": "phone" }],
-    "address" : [{ "use": "work", "type": "both", "city": "Bangalore", "state": "Karnataka" }]
+    "resourceType": "Organization",
+    "identifier": [
+        {
+            "system": "https://tmc.gov.in/ncg/",
+            "type": "12345"
+        }
+    ],
+    "name": "Infinity Health care & Diagnostics",
+    "active": true,
+    "type": [
+        {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/ValueSet/organization-type",
+                    "code": "prov",
+                    "display": "Healthcare Provider"
+                }
+            ]
+        }
+    ],
+    "telecom": [
+        {
+            "use": "work",
+            "value": "08080887877",
+            "system": "phone"
+        }
+    ],
+    "address": [
+        {
+            "use": "work",
+            "type": "both",
+            "city": "Bangalore",
+            "state": "Karnataka"
+        }
+    ]
 }
