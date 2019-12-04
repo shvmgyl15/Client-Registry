@@ -1,5 +1,8 @@
 package in.org.projecteka.clientregistry.repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import in.org.projecteka.clientregistry.model.Provider;
 import org.apache.commons.lang3.StringUtils;
 import in.org.projecteka.clientregistry.model.Resource;
 import in.org.projecteka.clientregistry.utils.DateUtil;
@@ -55,7 +58,7 @@ public class ResourceRepository {
         return value;
     }
 
-    public List<Resource> findResources(String type, String updatedSince, int offset, int limit, String searchTerm) throws ParseException {
+    public List<Resource> findResources(String type, String updatedSince, int offset, int limit, String name) throws ParseException, JsonProcessingException {
         String location = resourceUpdateLookup.get(type);
         if (StringUtils.isBlank(location)) return new ArrayList<>();
 
@@ -91,10 +94,15 @@ public class ResourceRepository {
         for (ResourceUpdate resourceUpdate : resourceUpdates) {
             Resource resource = findResource(type, resourceUpdate.identifier + ".json");
             if (resource != null) {
-                if (searchTerm == null) {
+                if (name == null) {
                     results.add(resource);
-                } else if (resource.getValue().contains(searchTerm)){
-                    results.add(resource);
+                } else {
+                    String value = resource.getValue();
+                    ObjectMapper mapper = new ObjectMapper();
+                    Provider provider = mapper.readValue(value, Provider.class);
+                    if (provider.getName().contains(name)){
+                        results.add(resource);
+                    }
                 }
             }
         }

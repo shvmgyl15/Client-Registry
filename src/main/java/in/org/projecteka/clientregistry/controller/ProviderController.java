@@ -1,6 +1,7 @@
 package in.org.projecteka.clientregistry.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import in.org.projecteka.clientregistry.model.Resource;
 import in.org.projecteka.clientregistry.repository.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,17 +35,18 @@ public class ProviderController extends BaseController {
     List<Resource> listproviders(@RequestParam(value = "updatedSince", required = false) String updatedSince,
                                   @RequestParam(value = "offset", required = false, defaultValue = "0") int offset,
                                   @RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
-                                  @RequestParam(value = "searchTerm", required = false) String searchTerm,
+                                  @RequestParam(value = "name", required = false) String name,
                                   HttpServletRequest request) {
 
         checkForValidUserRequest(request);
 
         try {
-             return providers.findResources("facility", updatedSince, offset, limit, searchTerm);
+             return providers.findResources("facility", updatedSince, offset, limit, name);
         } catch (ParseException e) {
             throw new BadRequest(e.getMessage());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Unable to process request");
         }
-
     }
 
 
