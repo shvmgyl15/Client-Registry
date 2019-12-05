@@ -3,12 +3,10 @@ package in.org.projecteka.clientregistry.repository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import in.org.projecteka.clientregistry.model.Provider;
-import org.apache.commons.lang3.StringUtils;
 import in.org.projecteka.clientregistry.model.Resource;
 import in.org.projecteka.clientregistry.utils.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Repository;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -16,10 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Repository
 public class ResourceRepository {
 
-    @Autowired
     private ApplicationContext context;
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -28,17 +24,21 @@ public class ResourceRepository {
 
     private Map<String, ArrayList<ResourceUpdate>> resourceFeeds = new HashMap<>();
         private Map<String, HashMap<String, String>> resourceMaps = new HashMap<String, HashMap<String, String>>() {{
-        put("facility",  providersMap);
+        put("provider",  providersMap);
     }};
 
 
     private Map<String, String> resourceUpdateLookup = new HashMap<String, String>() {{
-        put("facility",  "classpath:providers_list.txt");
+        put("provider",  "classpath:providers_list.txt");
     }};
 
     private Map<String, String> resourceLocations = new HashMap<String, String>() {{
-        put("facility",  "classpath:providers/");
+        put("provider",  "classpath:providers/");
     }};
+
+    public ResourceRepository(ApplicationContext context) {
+        this.context = context;
+    }
 
     private String locateResourceInPath(String id, String path) {
         String value = null;
@@ -75,7 +75,7 @@ public class ResourceRepository {
 
 
         if (locationUpdatesForType.isEmpty()) {
-            loadFacilityUpdates(location, locationUpdatesForType);
+            loadProviderUpdates(location, locationUpdatesForType);
         }
 
         ArrayList<Resource> results = new ArrayList<>();
@@ -137,7 +137,7 @@ public class ResourceRepository {
         }
     }
 
-    private void loadFacilityUpdates(String location, ArrayList<ResourceUpdate> resourceUpdates) {
+    private void loadProviderUpdates(String location, ArrayList<ResourceUpdate> resourceUpdates) {
         org.springframework.core.io.Resource resource = context.getResource(location);
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()), 1024);
