@@ -100,7 +100,7 @@ public class ResourceRepository {
                     String value = resource.getValue();
                     ObjectMapper mapper = new ObjectMapper();
                     Provider provider = mapper.readValue(value, Provider.class);
-                    if (provider.getName().contains(name)){
+                    if (provider.getName().toLowerCase().contains(name.toLowerCase())){
                         results.add(resource);
                     }
                 }
