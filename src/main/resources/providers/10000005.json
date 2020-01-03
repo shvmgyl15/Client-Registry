@@ -2,7 +2,7 @@
     "resourceType": "Organization",
     "identifier": [
         {
-            "system": "https://tmc.gov.in/ncg/",
+            "system": "http://localhost:8001",
             "type": "12345"
         }
     ],
