@@ -1,7 +1,5 @@
-FROM centos:6.6
-
-RUN yum install -y java
-COPY build/distributions/identity-server-0.1-1.noarch.rpm /tmp/identity-server.rpm
-RUN yum install -y /tmp/identity-server.rpm && rm -f /tmp/identity-server.rpm && yum clean all
-COPY env/docker_identity-server /etc/default/identity-server
-ENTRYPOINT . /etc/default/identity-server && java -Dserver.port=$IDENTITY_SERVER_PORT -jar /opt/identity-server/lib/IdentityService.war
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+COPY build/libs/* app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/app.jar"]
