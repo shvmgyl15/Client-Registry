@@ -3,7 +3,8 @@
     "identifier": [
         {
             "system": "http://localhost:8001",
-            "type": "12345"
+            "type": "234221",
+            "use": "official"
         }
     ],
     "name": "Max Health Care",

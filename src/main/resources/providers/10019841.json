@@ -3,7 +3,8 @@
     "identifier": [
         {
             "system": "https://tmc.gov.in/ncg/",
-            "type": "12345"
+            "type": "342342",
+            "use": "official"
         }
     ],
     "name": "Apollo Hospital",

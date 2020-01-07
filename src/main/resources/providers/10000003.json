@@ -3,7 +3,8 @@
     "identifier": [
         {
             "system": "https://tmc.gov.in/ncg/",
-            "type": "12345"
+            "type": "123456",
+            "use": "official"
         }
     ],
     "name": "All India Institutes of Medical Sciences",

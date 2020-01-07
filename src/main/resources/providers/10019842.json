@@ -3,7 +3,8 @@
     "identifier": [
         {
             "system": "https://tmc.gov.in/ncg/",
-            "type": "12345"
+            "type": "4234232",
+            "use": "official"
         }
     ],
     "name": "St John's Hospital",
