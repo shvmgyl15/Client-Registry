@@ -2,12 +2,12 @@
     "resourceType": "Organization",
     "identifier": [
         {
-            "system": "https://tmc.gov.in/ncg/",
-            "type": "4234232",
+            "system": "http://172.16.2.27:9052",
+            "type": "342342",
             "use": "official"
         }
     ],
-    "name": "St John's Hospital",
+    "name": "Apollo Hospital",
     "active": true,
     "type": [
         {
@@ -23,7 +23,7 @@
     "telecom": [
         {
             "use": "work",
-            "value": "08080887874",
+            "value": "08080887875",
             "system": "phone"
         }
     ],

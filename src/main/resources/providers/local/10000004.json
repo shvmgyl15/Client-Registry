@@ -2,12 +2,12 @@
     "resourceType": "Organization",
     "identifier": [
         {
-            "system": "http://localhost:8001",
-            "type": "234221",
+            "system": "http://localhost:9052",
+            "type": "2345",
             "use": "official"
         }
     ],
-    "name": "Max Health Care",
+    "name": "Infinity Health care & Diagnostics",
     "active": true,
     "type": [
         {
@@ -23,7 +23,7 @@
     "telecom": [
         {
             "use": "work",
-            "value": "08080887876",
+            "value": "08080887877",
             "system": "phone"
         }
     ],

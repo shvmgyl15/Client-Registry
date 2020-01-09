@@ -4,21 +4,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import in.org.projecteka.clientregistry.model.Provider;
 import in.org.projecteka.clientregistry.model.Resource;
-import in.org.projecteka.clientregistry.utils.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ResourceRepository {
 
     private ApplicationContext context;
-
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private HashMap<String, String> providersMap = new HashMap<>();
 
@@ -27,17 +23,21 @@ public class ResourceRepository {
         put("provider",  providersMap);
     }};
 
-
     private Map<String, String> resourceUpdateLookup = new HashMap<String, String>() {{
         put("provider",  "classpath:providers_list.txt");
     }};
 
-    private Map<String, String> resourceLocations = new HashMap<String, String>() {{
-        put("provider",  "classpath:providers/");
-    }};
+    private Map<String, String> resourceLocations = new HashMap<>() ;
 
     public ResourceRepository(ApplicationContext context) {
         this.context = context;
+        resourceLocations.put("provider", String.format("classpath:providers/%s/", getActiveProfile(context)));
+    }
+
+    private String getActiveProfile(ApplicationContext context) {
+        String[] profiles = context.getEnvironment().getActiveProfiles();
+        final String DEFAULT = "local";
+        return profiles.length > 0 && !profiles[0].equals("${profile}") ? profiles[0] : DEFAULT;
     }
 
     private String locateResourceInPath(String id, String path) {
@@ -62,17 +62,7 @@ public class ResourceRepository {
         String location = resourceUpdateLookup.get(type);
         if (StringUtils.isBlank(location)) return new ArrayList<>();
 
-        Date sinceDate = null;
-        if (!StringUtils.isBlank(updatedSince)) {
-            sinceDate = DateUtil.parseDate(updatedSince);
-        }
-
-        ArrayList<ResourceUpdate> locationUpdatesForType = resourceFeeds.get(type);
-        if (locationUpdatesForType == null) {
-            locationUpdatesForType = new ArrayList<ResourceUpdate>();
-            resourceFeeds.put(type, locationUpdatesForType);
-        }
-
+        ArrayList<ResourceUpdate> locationUpdatesForType = resourceFeeds.computeIfAbsent(type, k -> new ArrayList<>());
 
         if (locationUpdatesForType.isEmpty()) {
             loadProviderUpdates(location, locationUpdatesForType);
@@ -124,15 +114,12 @@ public class ResourceRepository {
             return new Resource(content);
         }
         return null;
-
     }
 
     private static class ResourceUpdate {
-        private Date updateDate;
         private String identifier;
 
-        public ResourceUpdate(Date updateDate, String identifier) {
-            this.updateDate = updateDate;
+        public ResourceUpdate(String identifier) {
             this.identifier = identifier;
         }
     }
@@ -144,7 +131,7 @@ public class ResourceRepository {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.trim().split(",");
-                ResourceUpdate resourceUpdate = new ResourceUpdate(dateFormat.parse(parts[0].trim()), parts[1].trim());
+                ResourceUpdate resourceUpdate = new ResourceUpdate(parts[1].trim());
                 resourceUpdates.add(resourceUpdate);
             }
             reader.close();
@@ -152,6 +139,4 @@ public class ResourceRepository {
             e.printStackTrace();
         }
     }
-
-
 }

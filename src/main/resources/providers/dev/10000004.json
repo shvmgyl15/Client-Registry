@@ -2,12 +2,12 @@
     "resourceType": "Organization",
     "identifier": [
         {
-            "system": "https://tmc.gov.in/ncg/",
-            "type": "342342",
+            "system": "http://172.16.2.27:9052",
+            "type": "2345",
             "use": "official"
         }
     ],
-    "name": "Apollo Hospital",
+    "name": "Infinity Health care & Diagnostics",
     "active": true,
     "type": [
         {
@@ -23,7 +23,7 @@
     "telecom": [
         {
             "use": "work",
-            "value": "08080887875",
+            "value": "08080887877",
             "system": "phone"
         }
     ],

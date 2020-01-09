@@ -1,0 +1,38 @@
+{
+    "resourceType": "Organization",
+    "identifier": [
+        {
+            "system": "http://172.16.2.27:9052",
+            "type": "123456",
+            "use": "official"
+        }
+    ],
+    "name": "All India Institutes of Medical Sciences",
+    "active": true,
+    "type": [
+        {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/ValueSet/organization-type",
+                    "code": "prov",
+                    "display": "Healthcare Provider"
+                }
+            ]
+        }
+    ],
+    "telecom": [
+        {
+            "use": "work",
+            "value": "08080887878",
+            "system": "phone"
+        }
+    ],
+    "address": [
+        {
+            "use": "work",
+            "type": "both",
+            "city": "Bangalore",
+            "state": "Karnataka"
+        }
+    ]
+}

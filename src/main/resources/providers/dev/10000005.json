@@ -2,12 +2,12 @@
     "resourceType": "Organization",
     "identifier": [
         {
-            "system": "https://tmc.gov.in/ncg/",
-            "type": "12345",
+            "system": "http://172.16.2.27:9052",
+            "type": "234221",
             "use": "official"
         }
     ],
-    "name": "Tata Memorial Hospital",
+    "name": "Max Health Care",
     "active": true,
     "type": [
         {
@@ -23,7 +23,7 @@
     "telecom": [
         {
             "use": "work",
-            "value": "08080887879",
+            "value": "08080887876",
             "system": "phone"
         }
     ],

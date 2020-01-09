@@ -2,12 +2,12 @@
     "resourceType": "Organization",
     "identifier": [
         {
-            "system": "https://tmc.gov.in/ncg/",
-            "type": "123456",
+            "system": "http://localhost:9052",
+            "type": "4234232",
             "use": "official"
         }
     ],
-    "name": "All India Institutes of Medical Sciences",
+    "name": "St John's Hospital",
     "active": true,
     "type": [
         {
@@ -23,7 +23,7 @@
     "telecom": [
         {
             "use": "work",
-            "value": "08080887878",
+            "value": "08080887874",
             "system": "phone"
         }
     ],

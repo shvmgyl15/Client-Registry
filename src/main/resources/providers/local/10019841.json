@@ -1,0 +1,38 @@
+{
+    "resourceType": "Organization",
+    "identifier": [
+        {
+            "system": "http://localhost:9052",
+            "type": "342342",
+            "use": "official"
+        }
+    ],
+    "name": "Apollo Hospital",
+    "active": true,
+    "type": [
+        {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/ValueSet/organization-type",
+                    "code": "prov",
+                    "display": "Healthcare Provider"
+                }
+            ]
+        }
+    ],
+    "telecom": [
+        {
+            "use": "work",
+            "value": "08080887875",
+            "system": "phone"
+        }
+    ],
+    "address": [
+        {
+            "use": "work",
+            "type": "both",
+            "city": "Bangalore",
+            "state": "Karnataka"
+        }
+    ]
+}

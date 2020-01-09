@@ -2,12 +2,12 @@
     "resourceType": "Organization",
     "identifier": [
         {
-            "system": "https://tmc.gov.in/ncg/",
-            "type": "2345",
+            "system": "http://localhost:9052",
+            "type": "12345",
             "use": "official"
         }
     ],
-    "name": "Infinity Health care & Diagnostics",
+    "name": "Tata Memorial Hospital",
     "active": true,
     "type": [
         {
@@ -23,7 +23,7 @@
     "telecom": [
         {
             "use": "work",
-            "value": "08080887877",
+            "value": "08080887879",
             "system": "phone"
         }
     ],
