@@ -3,7 +3,7 @@
     "identifier": [
         {
             "system": "http://172.16.2.27:9052",
-            "type": "12345",
+            "value": "10000002",
             "use": "official"
         }
     ],

@@ -3,7 +3,7 @@
     "identifier": [
         {
             "system": "http://localhost:9052",
-            "type": "123456",
+            "value": "10000003",
             "use": "official"
         }
     ],
