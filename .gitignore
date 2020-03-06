@@ -6,6 +6,7 @@ gradle-app.setting
 
 #Gradle dirs
 .gradle/
+.settings/
 
 #Idea dirs
 .idea/
@@ -14,11 +15,13 @@ gradle-app.setting
 *.iws
 
 #Build dirs
-build/
 out/
 classes
 target
 node_modules
+bin/
+.project
+.classpath
 
 #Target dirs
 target/

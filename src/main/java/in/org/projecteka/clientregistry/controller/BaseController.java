@@ -27,7 +27,7 @@ public class BaseController {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ResponseBody
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ErrorInfo notFound(ResourceNotFoundException exception) {
+    public ErrorInfo notFound() {
         return new ErrorInfo(HttpStatus.NOT_FOUND.value(), true, "Not found");
     }
 
@@ -44,6 +44,4 @@ public class BaseController {
     public ErrorInfo badCredentials(BadCredentialsException exception) {
         return new ErrorInfo(HttpStatus.UNAUTHORIZED.value(), true, exception.getMessage());
     }
-
-
 }

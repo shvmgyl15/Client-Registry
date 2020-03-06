@@ -1,6 +1,5 @@
 package in.org.projecteka.clientregistry.controller;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import in.org.projecteka.clientregistry.model.Resource;
 import in.org.projecteka.clientregistry.repository.ResourceRepository;
@@ -40,7 +39,6 @@ public class ProviderController extends BaseController {
         }
     }
 
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     Resource getProvider(@PathVariable String id, HttpServletRequest request) {
@@ -51,5 +49,4 @@ public class ProviderController extends BaseController {
         }
         return provider;
     }
-
 }
