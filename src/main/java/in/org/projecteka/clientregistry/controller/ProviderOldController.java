@@ -15,10 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.List;
 
+@Deprecated
 @Controller
-@RequestMapping("/api/2.0/providers")
+@RequestMapping("/api/1.0/providers")
 @AllArgsConstructor
-public class ProviderController extends BaseController {
+public class ProviderOldController extends BaseController {
 
     private final ResourceRepository resourceRepository;
 
@@ -29,7 +30,9 @@ public class ProviderController extends BaseController {
                                 @RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
                                 @RequestParam(value = "name", required = false) String name,
                                 HttpServletRequest request) {
-        checkValidServiceRequest(request);
+
+        checkForValidUserRequest(request);
+
         try {
             return resourceRepository.findResources("provider", updatedSince, offset, limit, name);
         } catch (ParseException e) {
@@ -42,7 +45,7 @@ public class ProviderController extends BaseController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     Resource getProvider(@PathVariable String id, HttpServletRequest request) {
-        checkValidServiceRequest(request);
+        checkForValidUserRequest(request);
         Resource provider = resourceRepository.findResource("provider", id + ".json");
         if (provider == null) {
             throw new ResourceNotFoundException();

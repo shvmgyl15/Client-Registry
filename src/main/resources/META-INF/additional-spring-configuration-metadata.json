@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "client_registry.identity.url",
+      "type": "java.lang.String",
+      "description": "URL for auth server."
+    }
+  ]
+}

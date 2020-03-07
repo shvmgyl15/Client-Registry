@@ -19,7 +19,11 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    testCompile("org.springframework.boot:spring-boot-starter-test")
-    compile("org.apache.commons:commons-lang3:3.9")
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    testCompileOnly "org.springframework.boot:spring-boot-starter-test"
+    implementation "org.apache.commons:commons-lang3:3.9"
+    compileOnly "org.projectlombok:lombok"
+    testCompileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+    implementation 'org.apache.httpcomponents:httpclient:4.3.4'
 }

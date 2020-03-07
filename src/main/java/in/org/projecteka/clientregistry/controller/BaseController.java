@@ -15,11 +15,21 @@ public class BaseController {
     @Autowired
     private IdentityRepository identityRepository;
 
+    @Autowired
+    Authenticator authenticator;
+
+    @Deprecated
     protected void checkForValidUserRequest(HttpServletRequest request) {
         String client_id = request.getHeader("client_id");
         String authToken = request.getHeader("X-Auth-Token");
         UserCredentials userCredentials = new UserCredentials(client_id, authToken, null, null);
         if (!identityRepository.checkClientIdAndAuthToken(userCredentials)) {
+            throw new BadCredentialsException("Not authenticated");
+        }
+    }
+
+    protected void checkValidServiceRequest(HttpServletRequest request) {
+        if (!authenticator.isValidServiceRequest(request.getHeader("Authorization"))) {
             throw new BadCredentialsException("Not authenticated");
         }
     }
