@@ -54,4 +54,11 @@ public class BaseController {
     public ErrorInfo badCredentials(BadCredentialsException exception) {
         return new ErrorInfo(HttpStatus.UNAUTHORIZED.value(), true, exception.getMessage());
     }
+
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    @ExceptionHandler(UnknownError.class)
+    public ErrorInfo wentWrong(UnknownError exception) {
+        return new ErrorInfo(HttpStatus.INTERNAL_SERVER_ERROR.value(), true, exception.getMessage());
+    }
 }

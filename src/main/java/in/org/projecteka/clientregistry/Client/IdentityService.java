@@ -1,5 +1,8 @@
 package in.org.projecteka.clientregistry.Client;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import in.org.projecteka.clientregistry.controller.BadRequest;
 import lombok.AllArgsConstructor;
 import lombok.var;
@@ -16,12 +19,12 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Properties;
 
 import static java.lang.String.format;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @AllArgsConstructor
@@ -56,15 +59,13 @@ public class IdentityService {
 
     public Optional<Caller> verify(String token) {
         try {
-            HttpHeaders headers = new HttpHeaders();
-            List<MediaType> mediaTypes = new ArrayList<>();
+            var headers = new HttpHeaders();
+            var mediaTypes = new ArrayList<MediaType>();
             mediaTypes.add(APPLICATION_JSON);
             headers.setAccept(mediaTypes);
-            headers.set(HttpHeaders.AUTHORIZATION, token);
+            headers.set(AUTHORIZATION, token);
             HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(headers);
-            var response = client.exchange(format("%s/realms/%s/protocol/openid-connect/userinfo",
-                    url,
-                    realmName),
+            var response = client.exchange(format("%s/realms/%s/protocol/openid-connect/userinfo", url, realmName),
                     HttpMethod.GET,
                     entity,
                     Properties.class);
@@ -75,6 +76,31 @@ public class IdentityService {
             logger.error(ex.getLocalizedMessage(), ex);
         }
         return Optional.empty();
+    }
+
+
+    public JsonNode certs() {
+        try {
+            var headers = new HttpHeaders();
+            var mediaTypes = new ArrayList<MediaType>();
+            mediaTypes.add(APPLICATION_JSON);
+            headers.setAccept(mediaTypes);
+            HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(headers);
+            var response = client.exchange(format("%s/realms/%s/protocol/openid-connect/certs", url, realmName),
+                    HttpMethod.GET,
+                    entity,
+                    JsonNode.class);
+            if (response.getStatusCode().is2xxSuccessful()) {
+                return response.getBody();
+            }
+        } catch (RestClientException ex) {
+            logger.error(ex.getLocalizedMessage(), ex);
+        }
+        throw new UnknownError("Something went wrong.");
+    }
+
+    public JsonNode configuration(String host) throws JsonProcessingException {
+        return new ObjectMapper().readTree(format("{\"jwks_uri\": \"%s/certs\"}", host));
     }
 
     private MultiValueMap<String, String> requestWith(String clientId, String clientSecret) {

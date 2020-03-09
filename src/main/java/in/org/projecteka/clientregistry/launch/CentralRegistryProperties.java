@@ -5,9 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties(prefix = "centralregistry.identity")
+@ConfigurationProperties(prefix = "centralregistry")
 @Data
-class IdentityServiceProperties {
-    private String url;
-    private String realm;
+public class CentralRegistryProperties {
+    private String host;
 }
