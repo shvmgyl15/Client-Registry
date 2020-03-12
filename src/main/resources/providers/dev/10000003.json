@@ -2,12 +2,12 @@
     "resourceType": "Organization",
     "identifier": [
         {
-            "system": "http://172.16.2.27:9052",
+            "system": "https://ncg.amritatech.com",
             "value": "10000003",
             "use": "official"
         }
     ],
-    "name": "All India Institutes of Medical Sciences",
+    "name": "Amrita Institute of Medical Sciences (AIMS), Kochi",
     "active": true,
     "type": [
         {
@@ -31,8 +31,8 @@
         {
             "use": "work",
             "type": "both",
-            "city": "Bangalore",
-            "state": "Karnataka"
+            "city": "Kochin",
+            "state": "Kerala"
         }
     ]
 }
