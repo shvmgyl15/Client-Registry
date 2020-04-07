@@ -25,5 +25,5 @@ dependencies {
     compileOnly "org.projectlombok:lombok"
     testCompileOnly "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok"
-    implementation 'org.apache.httpcomponents:httpclient:4.3.4'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.12'
 }
