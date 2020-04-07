@@ -1,0 +1,38 @@
+{
+  "resourceType": "Organization",
+  "identifier": [
+    {
+      "system": "http://localhost:8002",
+      "value": "consent-manager",
+      "use": "official"
+    }
+  ],
+  "name": "CM-NCG",
+  "active": true,
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://hl7.org/fhir/ValueSet/organization-type",
+          "code": "prov",
+          "display": "Consent Manager"
+        }
+      ]
+    }
+  ],
+  "telecom": [
+    {
+      "use": "work",
+      "value": "08080887876",
+      "system": "phone"
+    }
+  ],
+  "address": [
+    {
+      "use": "work",
+      "type": "both",
+      "city": "Bangalore",
+      "state": "Karnataka"
+    }
+  ]
+}
