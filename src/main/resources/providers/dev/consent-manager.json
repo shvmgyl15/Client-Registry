@@ -2,7 +2,7 @@
   "resourceType": "Organization",
   "identifier": [
     {
-      "system": "http://localhost:8000",
+      "system": "http://consent-manager:8000",
       "value": "consent-manager",
       "use": "official"
     }
