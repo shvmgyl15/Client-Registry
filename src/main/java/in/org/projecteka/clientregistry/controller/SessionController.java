@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import in.org.projecteka.clientregistry.Client.IdentityService;
 import in.org.projecteka.clientregistry.Client.Session;
 import in.org.projecteka.clientregistry.launch.CentralRegistryProperties;
+import in.org.projecteka.clientregistry.model.SessionRefreshRequest;
 import in.org.projecteka.clientregistry.model.SessionRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,11 @@ public class SessionController extends BaseController {
     @RequestMapping("/api/1.0/sessions")
     public Session with(@RequestBody SessionRequest session) {
         return identityService.getTokenFor(session.getClientId(), session.getClientSecret());
+    }
+
+    @RequestMapping("/api/1.0/sessionsRefresh")
+    public Session with(@RequestBody SessionRefreshRequest session) {
+        return identityService.getTokenForUsingRefresh(session.getClientId(), session.getClientSecret(), session.getRefreshToken());
     }
 
     @RequestMapping("/.well-known/openid-configuration")
