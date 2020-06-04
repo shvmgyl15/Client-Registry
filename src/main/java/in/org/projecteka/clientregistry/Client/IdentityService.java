@@ -57,29 +57,6 @@ public class IdentityService {
         throw new BadRequest("Something went wrong");
     }
 
-    public Session getTokenForUsingRefresh(String clientId, String clientSecret, String refreshToken) {
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-            MultiValueMap<String, String> map = requestWithRefreshToken(clientId, clientSecret, refreshToken);
-            HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
-            ResponseEntity<Session> response = client.exchange(format("%s/realms/%s/protocol/openid-connect/token",
-                    url,
-                    realmName),
-                    HttpMethod.POST,
-                    entity,
-                    Session.class);
-            if (response.getStatusCode().is2xxSuccessful()) {
-                return response.getBody();
-            }
-            logger.error(format("Something went wrong: %d", response.getStatusCodeValue()));
-        } catch (RestClientException ex) {
-            logger.error(ex.getLocalizedMessage(), ex);
-        }
-        // TODO: Use optional
-        throw new BadRequest("Something went wrong");
-    }
-
     public Optional<Caller> verify(String token) {
         try {
             var headers = new HttpHeaders();
@@ -132,16 +109,6 @@ public class IdentityService {
         formData.add("scope", "openid");
         formData.add("client_id", clientId);
         formData.add("client_secret", clientSecret);
-        return formData;
-    }
-
-    private MultiValueMap<String, String> requestWithRefreshToken(String clientId, String clientSecret, String refreshToken) {
-        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
-        formData.add("grant_type", "refresh_token");
-        formData.add("scope", "openid");
-        formData.add("client_id", clientId);
-        formData.add("client_secret", clientSecret);
-        formData.add("refresh_token", refreshToken);
         return formData;
     }
 
