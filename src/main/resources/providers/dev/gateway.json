@@ -1,0 +1,38 @@
+{
+  "resourceType": "Organization",
+  "identifier": [
+    {
+      "system": "http://gateway:9061",
+      "value": "gateway",
+      "use": "official"
+    }
+  ],
+  "name": "GATEWAY-NCG",
+  "active": true,
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://hl7.org/fhir/ValueSet/organization-type",
+          "code": "prov",
+          "display": "Gateway"
+        }
+      ]
+    }
+  ],
+  "telecom": [
+    {
+      "use": "work",
+      "value": "08080887876",
+      "system": "phone"
+    }
+  ],
+  "address": [
+    {
+      "use": "work",
+      "type": "both",
+      "city": "Bangalore",
+      "state": "Karnataka"
+    }
+  ]
+}
