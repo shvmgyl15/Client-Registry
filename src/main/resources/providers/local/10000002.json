@@ -2,7 +2,7 @@
     "resourceType": "Organization",
     "identifier": [
         {
-            "system": "http://ncg.tmc.gov.in/hip-service",
+            "system": "http://localhost:8002",
             "value": "10000002",
             "use": "official"
         }
