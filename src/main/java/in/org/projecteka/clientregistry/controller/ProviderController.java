@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.List;
 
@@ -27,8 +26,7 @@ public class ProviderController extends BaseController {
     List<Resource> getProviders(@RequestParam(value = "updatedSince", required = false) String updatedSince,
                                 @RequestParam(value = "offset", required = false, defaultValue = "0") int offset,
                                 @RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
-                                @RequestParam(value = "name", required = false) String name,
-                                HttpServletRequest request) {
+                                @RequestParam(value = "name", required = false) String name) {
         try {
             return resourceRepository.findResources("provider", updatedSince, offset, limit, name);
         } catch (ParseException e) {
@@ -40,7 +38,7 @@ public class ProviderController extends BaseController {
 
     @GetMapping(value = "/{id}", produces = "application/json")
     public @ResponseBody
-    Resource getProvider(@PathVariable String id, HttpServletRequest request) {
+    Resource getProvider(@PathVariable String id) {
         Resource provider = resourceRepository.findResource("provider", id + ".json");
         if (provider == null) {
             throw new ResourceNotFoundException();
