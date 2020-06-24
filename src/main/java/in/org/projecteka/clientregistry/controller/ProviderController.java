@@ -5,9 +5,9 @@ import in.org.projecteka.clientregistry.model.Resource;
 import in.org.projecteka.clientregistry.repository.ResourceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,14 +22,13 @@ public class ProviderController extends BaseController {
 
     private final ResourceRepository resourceRepository;
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(produces = "application/json")
     public @ResponseBody
     List<Resource> getProviders(@RequestParam(value = "updatedSince", required = false) String updatedSince,
                                 @RequestParam(value = "offset", required = false, defaultValue = "0") int offset,
                                 @RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
                                 @RequestParam(value = "name", required = false) String name,
                                 HttpServletRequest request) {
-        checkValidServiceRequest(request);
         try {
             return resourceRepository.findResources("provider", updatedSince, offset, limit, name);
         } catch (ParseException e) {
@@ -39,10 +38,9 @@ public class ProviderController extends BaseController {
         }
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(value = "/{id}", produces = "application/json")
     public @ResponseBody
     Resource getProvider(@PathVariable String id, HttpServletRequest request) {
-        checkValidServiceRequest(request);
         Resource provider = resourceRepository.findResource("provider", id + ".json");
         if (provider == null) {
             throw new ResourceNotFoundException();
