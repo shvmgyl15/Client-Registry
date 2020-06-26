@@ -18,6 +18,7 @@ jobs:
         version: '${{ github.sha }}'
         release: client-registry
         chart: 'Charts/client-registry'
+        namespace: 'nha'
         helm: 'helm3'
       env:
         KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'

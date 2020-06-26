@@ -6,7 +6,6 @@ dev:
   description: 'Dev'
   payload:
     value_files: ["./config/dev.yml", "./config/_common.yml"]
-    namespace: 'nha'
     track: stable
     values:
       replicaCount: 1
