@@ -21,7 +21,7 @@ jobs:
     - name: Install Helm
       run: "curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 && chmod 700 get_helm.sh &&./get_helm.sh"
 
-    - name: 'Deploy'
+    - name: 'Helm Deploy'
       # Parameters are pulled directly from the GitHub deployment event so the
       # configuration for the job here is very minimal.
       run: helm upgrade --install --wait --namespace nha client-registry Charts/client-registry
