@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: "ganesan92/client-registry:6c91437"
+  repository: "ganesan92/client-registry"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []

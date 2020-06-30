@@ -24,4 +24,6 @@ jobs:
     - name: 'Helm Deploy'
       # Parameters are pulled directly from the GitHub deployment event so the
       # configuration for the job here is very minimal.
-      run: helm upgrade --install --wait --namespace nha client-registry Charts/client-registry
+      run: helm upgrade --install --wait --namespace nha client-registry Charts/client-registry --set-string image.tag=$RELEASE_VERSION
+      env:
+        RELEASE_VERSION: $RELEASE_VERSION
