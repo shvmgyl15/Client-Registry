@@ -1,0 +1,38 @@
+{
+    "resourceType": "Organization",
+    "identifier": [
+        {
+            "system": "http://172.16.2.27:9080",
+            "value": "10019843",
+            "use": "official"
+        }
+    ],
+    "name": "Well Being Hospital",
+    "active": true,
+    "type": [
+        {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/ValueSet/organization-type",
+                    "code": "prov",
+                    "display": "Healthcare Provider"
+                }
+            ]
+        }
+    ],
+    "telecom": [
+        {
+            "use": "work",
+            "value": "08080887874",
+            "system": "phone"
+        }
+    ],
+    "address": [
+        {
+            "use": "work",
+            "type": "both",
+            "city": "Bangalore",
+            "state": "Karnataka"
+        }
+    ]
+}
