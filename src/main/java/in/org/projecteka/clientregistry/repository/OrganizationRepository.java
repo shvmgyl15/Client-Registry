@@ -22,11 +22,12 @@ public class OrganizationRepository {
     }
 
     public List<Organization> findAll(String name) {
+        String search = "%" + name.toUpperCase() + "%";
         return jdbcTemplate.query(
                 "SELECT org_id, org_name, org_type, active, org_alias, phone, city, state " +
                         "FROM organization " +
-                        "WHERE UPPER(org_name) like ?",
-                new Object[]{"%"+name.toUpperCase()+"%"},
+                        "WHERE UPPER(org_name) like ? OR UPPER(org_alias) like ?",
+                new Object[]{search, search},
                 this::mapRow);
     }
 
