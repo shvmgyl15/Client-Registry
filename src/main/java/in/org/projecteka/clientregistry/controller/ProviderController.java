@@ -1,7 +1,9 @@
 package in.org.projecteka.clientregistry.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import in.org.projecteka.clientregistry.model.Organization;
 import in.org.projecteka.clientregistry.model.Resource;
+import in.org.projecteka.clientregistry.repository.OrganizationRepository;
 import in.org.projecteka.clientregistry.repository.ResourceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
