@@ -42,7 +42,51 @@
             <column name="date_modified" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
-
         </createTable>
+    </changeSet>
+    <changeSet id="202003081909" author="Angshu" context="v1">
+        <preConditions  onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">select count(*) from organization where org_id='10000005'</sqlCheck>
+        </preConditions>
+        <insert  tableName="organization">
+            <column  name="org_id"  value="10000005"/>
+            <column  name="org_name"  value="Max Health Care"/>
+            <column  name="org_alias"  value="MAX, MHC"/>
+            <column  name="org_type"  value="prov"/>
+            <column  name="active"  value="true"/>
+            <column  name="phone"  value="+911126515050"/>
+            <column  name="city"  value="New Delhi"/>
+            <column  name="state"  value="Delhi"/>
+        </insert>
+    </changeSet>
+    <changeSet id="202003081912" author="Angshu" context="v1">
+        <preConditions  onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">select count(*) from organization where org_id='10019843'</sqlCheck>
+        </preConditions>
+        <insert  tableName="organization">
+            <column  name="org_id"  value="10019843"/>
+            <column  name="org_name"  value="Well Being Hospital, Jayanagar"/>
+            <column  name="org_alias"  value="WBH"/>
+            <column  name="org_type"  value="prov"/>
+            <column  name="active"  value="true"/>
+            <column  name="phone"  value="08080887876"/>
+            <column  name="city"  value="Bangalore"/>
+            <column  name="state"  value="Karnataka"/>
+        </insert>
+    </changeSet>
+    <changeSet id="202003081921" author="Angshu" context="v1">
+        <preConditions  onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">select count(*) from organization where org_id='10000002'</sqlCheck>
+        </preConditions>
+        <insert  tableName="organization">
+            <column  name="org_id"  value="10000002"/>
+            <column  name="org_name"  value="Tata Memorial Hospital"/>
+            <column  name="org_alias"  value="TMH, TMC"/>
+            <column  name="org_type"  value="prov"/>
+            <column  name="active"  value="true"/>
+            <column  name="phone"  value="+91-22-24177000"/>
+            <column  name="city"  value="Mumbai"/>
+            <column  name="state"  value="Maharashtra"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>
