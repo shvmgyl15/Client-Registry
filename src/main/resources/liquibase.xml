@@ -1,0 +1,48 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="202001081205" author="Angshu" context="v1">
+        <preConditions>
+            <not>
+                <tableExists tableName="organization"/>
+            </not>
+        </preConditions>
+        <comment>Add organization table</comment>
+
+        <createTable tableName="organization">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="org_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="org_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="org_alias" type="VARCHAR(50)">
+            </column>
+            <column name="org_type" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BOOLEAN" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(20)">
+            </column>
+            <column name="city" type="VARCHAR(30)">
+            </column>
+            <column name="state" type="VARCHAR(30)">
+            </column>
+            <column name="date_created" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_modified" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
