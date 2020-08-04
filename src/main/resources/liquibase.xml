@@ -89,4 +89,34 @@
             <column  name="state"  value="Maharashtra"/>
         </insert>
     </changeSet>
+    <changeSet id="202004081843" author="Angshu" context="v1">
+        <preConditions  onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">select count(*) from organization where org_id='10019842'</sqlCheck>
+        </preConditions>
+        <insert  tableName="organization">
+            <column  name="org_id"  value="10019842"/>
+            <column  name="org_name"  value="St John's Hospital"/>
+            <column  name="org_alias"  value="SJMCH"/>
+            <column  name="org_type"  value="prov"/>
+            <column  name="active"  value="true"/>
+            <column  name="phone"  value="9999999999"/>
+            <column  name="city"  value="Bangalore"/>
+            <column  name="state"  value="Karnataka"/>
+        </insert>
+    </changeSet>
+    <changeSet id="202004081845" author="Angshu" context="v1">
+        <preConditions  onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">select count(*) from organization where org_id='10000009'</sqlCheck>
+        </preConditions>
+        <insert  tableName="organization">
+            <column  name="org_id"  value="10000009"/>
+            <column  name="org_name"  value="Patient HIU"/>
+            <column  name="org_alias"  value="PHIU"/>
+            <column  name="org_type"  value="prov"/>
+            <column  name="active"  value="true"/>
+            <column  name="phone"  value="08080887876"/>
+            <column  name="city"  value="Bangalore"/>
+            <column  name="state"  value="Karnataka"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
