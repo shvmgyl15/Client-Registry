@@ -1,6 +1,7 @@
 package in.org.projecteka.clientregistry.repository;
 
 import in.org.projecteka.clientregistry.model.Address;
+import in.org.projecteka.clientregistry.model.BridgeServiceRequest;
 import in.org.projecteka.clientregistry.model.Coding;
 import in.org.projecteka.clientregistry.model.Identifier;
 import in.org.projecteka.clientregistry.model.Organization;
@@ -10,6 +11,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Collections;
 import java.util.List;
 
@@ -98,5 +101,40 @@ public class OrganizationRepository {
             return organizations.get(0);
         }
         return null;
+    }
+
+    public int addOrUpdateOrganization(BridgeServiceRequest organization) {
+        Organization org = find(organization.getId());
+        if (org == null) {
+            return jdbcTemplate.update(
+                    "INSERT INTO organization(org_id, org_name, org_alias, org_type, active, phone, city, state," +
+                            " date_created, date_modified)" +
+                            " VALUES(?,?,?,?,?,?,?,?,?,?)"
+                    , organization.getId(), organization.getName(), String.join(",", organization.getOrgAlias()),
+                    organization.getType(), organization.getActive(), organization.getPhone(), organization.getCity(),
+                    organization.getState(), LocalDateTime.now(ZoneOffset.UTC), LocalDateTime.now(ZoneOffset.UTC));
+        } else {
+            String updateOrganizationQuery = "UPDATE organization SET ";
+            if (organization.getName() != null) {
+                updateOrganizationQuery += "org_name = '" + organization.getName() + "', ";
+            }
+            if (organization.getOrgAlias() != null) {
+                updateOrganizationQuery += "org_alias = '" + String.join(",", organization.getOrgAlias()) + "', ";
+            }
+            if (organization.getActive() != null) {
+                updateOrganizationQuery += "active = '" + organization.getActive() + "', ";
+            }
+            if (organization.getPhone() != null) {
+                updateOrganizationQuery += "phone = '" + organization.getPhone() + "', ";
+            }
+            if (organization.getCity() != null) {
+                updateOrganizationQuery += "city = '" + organization.getCity() + "', ";
+            }
+            if (organization.getState() != null) {
+                updateOrganizationQuery += "state = '" + organization.getState() + "', ";
+            }
+            updateOrganizationQuery += "date_modified = '" + LocalDateTime.now(ZoneOffset.UTC) + "' WHERE org_id = '" + organization.getId() + "'";
+            return jdbcTemplate.update(updateOrganizationQuery);
+        }
     }
 }
