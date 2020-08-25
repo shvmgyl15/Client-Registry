@@ -1,6 +1,9 @@
-name: Master
+name: Relese
 
-on: [push]
+on:
+    push:
+      tags:
+        - '*'
 
 jobs:
   build:
@@ -14,7 +17,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
       - name: Set env
-        run: echo ::set-env name=RELEASE_VERSION::$(echo $GITHUB_SHA | head -c7)
+        run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF:10}
       - name: Docker Registry
         env:
           DOCKER_REGISTRY_URL: docker.io
