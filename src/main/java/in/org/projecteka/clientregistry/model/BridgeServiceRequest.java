@@ -1,5 +1,6 @@
 package in.org.projecteka.clientregistry.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Builder.Default;
@@ -15,8 +16,8 @@ import java.util.List;
 public class BridgeServiceRequest {
     private String id;
     private String name;
-    @Default
-    private String type="prov";
+    @JsonProperty("serviceType")
+    private String orgType;
     private List<String> orgAlias;
     @Default
     private Boolean active=true;

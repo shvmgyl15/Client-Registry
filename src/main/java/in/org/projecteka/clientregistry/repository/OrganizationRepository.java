@@ -13,8 +13,10 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class OrganizationRepository {
@@ -48,13 +50,8 @@ public class OrganizationRepository {
                     .value(orgId)
                     .use("official")
                     .build();
-            Coding orgTypeCode = Coding.builder()
-                    .system("http://hl7.org/fhir/ValueSet/organization-type")
-                    .code(orgType)
-                    .display("Healthcare Provider")
-                    .build();
             OrganizationType organizationType = OrganizationType.builder()
-                    .coding(Collections.singletonList(orgTypeCode))
+                    .coding(createList(orgType))
                     .build();
 
             Telecom tele = null;
@@ -81,7 +78,7 @@ public class OrganizationRepository {
                     .id(orgId)
                     .identifier(Collections.singletonList(identifier))
                     .active(active)
-                    .type(Collections.singletonList(organizationType))
+                    .orgType(Collections.singletonList(organizationType))
                     .telecom(tele != null ? Collections.singletonList(tele)  : null)
                     .address(addr != null ? Collections.singletonList(addr)  : null)
                     .build();
@@ -89,6 +86,16 @@ public class OrganizationRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private List<Coding> createList(String orgType) {
+        String[] stringArr =  orgType.split(",");
+        List<Coding> codingList = new ArrayList<>();
+        for (String code: stringArr) {
+            codingList.add(Coding.builder().code(code.toUpperCase()).display("Healthcare Provider")
+                    .system("http://hl7.org/fhir/ValueSet/organization-type").build());
+        }
+        return codingList;
     }
 
     public Organization find(String id) {
@@ -111,7 +118,7 @@ public class OrganizationRepository {
                             " date_created, date_modified)" +
                             " VALUES(?,?,?,?,?,?,?,?,?,?)"
                     , organization.getId(), organization.getName(), String.join(",", organization.getOrgAlias()),
-                    organization.getType(), organization.getActive(), organization.getPhone(), organization.getCity(),
+                    organization.getOrgType(), organization.getActive(), organization.getPhone(), organization.getCity(),
                     organization.getState(), LocalDateTime.now(ZoneOffset.UTC), LocalDateTime.now(ZoneOffset.UTC));
         } else {
             String updateOrganizationQuery = "UPDATE organization SET ";
@@ -132,6 +139,20 @@ public class OrganizationRepository {
             }
             if (organization.getState() != null) {
                 updateOrganizationQuery += "state = '" + organization.getState() + "', ";
+            }
+            if (organization.getOrgType() != null) {
+                var orgList = org.getOrgType()
+                        .stream()
+                        .flatMap(type -> type.getCoding().stream())
+                        .map(coding -> coding.getCode().toUpperCase())
+                        .filter(code -> !code.equals(organization.getOrgType()))
+                        .collect(Collectors.joining(","));
+
+                orgList = !orgList.isEmpty()
+                        ? orgList.concat(",").concat(organization.getOrgType())
+                        : organization.getOrgType().concat(",");
+
+                updateOrganizationQuery += "org_type = '" +orgList+"', ";
             }
             updateOrganizationQuery += "date_modified = '" + LocalDateTime.now(ZoneOffset.UTC) + "' WHERE org_id = '" + organization.getId() + "'";
             return jdbcTemplate.update(updateOrganizationQuery);

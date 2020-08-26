@@ -16,7 +16,7 @@ public class Organization {
     private List<Identifier> identifier;
     private String name;
     private boolean active;
-    private  List<OrganizationType> type;
+    private  List<OrganizationType> orgType;
     private List<Telecom> telecom;
     private List<Address> address;
 }

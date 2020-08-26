@@ -119,4 +119,9 @@
             <column  name="state"  value="Karnataka"/>
         </insert>
     </changeSet>
+    <changeSet id="202024081055" author="mahendra" context="v1">
+        <update tableName="organization">
+            <column name="org_type" value="PROV,HIP"/>
+        </update>
+    </changeSet>
 </databaseChangeLog>
