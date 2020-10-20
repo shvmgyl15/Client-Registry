@@ -124,7 +124,7 @@
             <column name="org_type" value="PROV,HIP"/>
         </update>
     </changeSet>
-    <changeSet id="202010201615" author="dubey" context="v1">
+    <changeSet id="202010201615" author="Dubey" context="v1">
         <modifyDataType
             columnName="org_type"
             newDataType="varchar(1000)"
