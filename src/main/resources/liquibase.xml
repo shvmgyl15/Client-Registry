@@ -124,4 +124,25 @@
             <column name="org_type" value="PROV,HIP"/>
         </update>
     </changeSet>
+    <changeSet id="202010201615" author="dubey" context="v1">
+        <modifyDataType
+            columnName="org_type"
+            newDataType="varchar(1000)"
+            tableName="organization"/>
+    </changeSet>
+    <changeSet id="202010201615" author="Dubey" context="v1">
+        <preConditions  onFail="MARK_RAN">
+            <sqlCheck  expectedResult="0">select count(*) from organization where org_id='10000010'</sqlCheck>
+        </preConditions>
+        <insert  tableName="organization">
+            <column  name="org_id"  value="10000010"/>
+            <column  name="org_name"  value="NDHM Health Locker"/>
+            <column  name="org_alias"  value="HEALTH_LOCKER"/>
+            <column  name="org_type"  value="PROV,HIP,HIU,HEALTH_LOCKER"/>
+            <column  name="active"  value="true"/>
+            <column  name="phone"  value="08080887876"/>
+            <column  name="city"  value="Bangalore"/>
+            <column  name="state"  value="Karnataka"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
