@@ -28,5 +28,5 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpclient:4.5.12'
     implementation 'org.liquibase:liquibase-core:4.0.0'
     implementation('org.postgresql:postgresql')
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.3.2.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.4.1'
 }
