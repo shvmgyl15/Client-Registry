@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-registry-test
+  namespace: consent-manager
+  labels:
+    app: client-registry-test
+  # annotations:
+  #   service.beta.kubernetes.io/do-loadbalancer-algorithm: "least_connections"
+  #   service.beta.kubernetes.io/azure-load-balancer-internal: "true" 
+spec:
+  selector:
+    app: client-registry-test
+  sessionAffinity: ClientIP
+  type: LoadBalancer
+  # sessionAffinityConfig:
+  #   clientIP:
+  #     timeoutSeconds: 600
+  ports:
+    - name: http
+      port: 8080

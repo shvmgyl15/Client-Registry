@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: consent-manager
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-registry-test
+  namespace: consent-manager
+  labels:
+    app: client-registry-test
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: client-registry-test
+  template:
+    metadata:
+      labels:
+        app: client-registry-test
+    spec:
+      containers:
+        - name: client-registry-test
+          image: devinfysurveyappregistry.azurecr.io/client-registry-test:latest
+          env:
+            - name: "PROFILE"
+              value: ""
+            - name: "IDENTITY_SERVICE_URL"
+              value: "http://20.40.6.45:8080/auth"
+            - name: "REALM_NAME"
+              value: "central-registry"
+            - name: "CENTRAL_REGISTRY_HOST"
+              value: ""
+            - name: "CENTRAL_REGISTRY_JDBC_URL"
+              value: "jdbc:postgresql://infy-survey-app.postgres.database.azure.com:5432/central_registry"
+            - name: "CENTRAL_REGISTRY_DB_USERNAME"
+              value: "infysurveydev@infy-survey-app"
+            - name: "CENTRAL_REGISTRY_DB_PASSWORD"
+              value: "infy@123_"
+
+          ports:
+            - containerPort: 8080
