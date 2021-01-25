@@ -37,7 +37,7 @@ spec:
             - name: "REALM_NAME"
               value: "central-registry"
             - name: "CENTRAL_REGISTRY_HOST"
-              value: ""
+              value: "http://20.40.2.56:8080"
             - name: "CENTRAL_REGISTRY_JDBC_URL"
               value: "jdbc:postgresql://infy-survey-app.postgres.database.azure.com:5432/central_registry"
             - name: "CENTRAL_REGISTRY_DB_USERNAME"
