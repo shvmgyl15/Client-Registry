@@ -6,6 +6,8 @@ pipeline {
 		stage('Build and Publish Docker Image to Azure Container Registry') {
                         steps {
                                 withCredentials([string(credentialsId: 'EKS-Region', variable: 'REGION'), string(credentialsId: 'Registry-Name', variable: 'REGISTRY_NAME')]) {
+					sh 'source "$HOME/.sdkman/bin/sdkman-init.sh"'
+					sh 'sdk use java 11.0.2-open'
 					sh './gradlew build'
 					sh 'docker login -u AWS -p $(aws ecr get-login-password --region $REGION) $REGISTRY_NAME'
 					sh 'echo $REGISTRY_NAME"/consent-manager/client-registry:${BUILD_NUMBER}"'
