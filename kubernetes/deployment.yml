@@ -28,22 +28,22 @@ spec:
     spec:
       containers:
         - name: client-registry-test
-          image: devinfysurveyappregistry.azurecr.io/client-registry-test:latest
+          image: 413379950444.dkr.ecr.us-east-2.amazonaws.com/consent-manager/client-registry:latest
           env:
             - name: "PROFILE"
               value: ""
             - name: "IDENTITY_SERVICE_URL"
-              value: "http://20.40.6.45:8080/auth"
+              value: "http://a1e12bb8b0a7545e0b08b6ecb5e9c3d7-48752150.us-east-2.elb.amazonaws.com:8080/auth"
             - name: "REALM_NAME"
               value: "central-registry"
             - name: "CENTRAL_REGISTRY_HOST"
-              value: "http://20.40.2.56:8080"
+              value: "http://a275e34436d4f4bc6b32fddca3a084a8-110520610.us-east-2.elb.amazonaws.com:8080"
             - name: "CENTRAL_REGISTRY_JDBC_URL"
-              value: "jdbc:postgresql://infy-survey-app.postgres.database.azure.com:5432/central_registry"
+              value: "jdbc:postgresql://172.16.10.131:5432/central_registry"
             - name: "CENTRAL_REGISTRY_DB_USERNAME"
-              value: "infysurveydev@infy-survey-app"
+              value: "postgres"
             - name: "CENTRAL_REGISTRY_DB_PASSWORD"
-              value: "infy@123_"
+              value: "8U-BWr9Gz!276zLe"
 
           ports:
             - containerPort: 8080
