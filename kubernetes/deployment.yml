@@ -33,7 +33,7 @@ spec:
             - name: "PROFILE"
               value: ""
             - name: "IDENTITY_SERVICE_URL"
-              value: "http://a1e12bb8b0a7545e0b08b6ecb5e9c3d7-48752150.us-east-2.elb.amazonaws.com:8080/auth"
+              value: "https://vaccine.surveymaster.in/auth"
             - name: "REALM_NAME"
               value: "central-registry"
             - name: "CENTRAL_REGISTRY_HOST"
